@@ -27,20 +27,20 @@ char	**init_matrix(int fd)
 	{
 		length = lenstr(line);
 		line_count++;
-		// free(line);
+		free(line);
 	}
-	matrix = malloc(sizeof(char *) * line_count);
+	matrix = malloc(sizeof(char *) * line_count + 1);
 	if (!matrix)
 		return (NULL);
 	i = 0;
 	while (i < line_count)
 	{
-		matrix[i] = malloc(sizeof(char) * length);
+		matrix[i] = malloc(sizeof(char) * length + 1);
 		if (!matrix[i])
 		{
-			// while (i >= 0)
-			// 	free(matrix[i--]);
-			// free(matrix);
+			while (i >= 0)
+				free(matrix[i--]);
+			free(matrix);
 			return (NULL);
 		}
 		i++;
@@ -68,7 +68,7 @@ void	fill_matrix(char **map)
 				map[i][j] = line[j];
 			j++;
 		}
-		// free(line);
+		free(line);
 		i++;
 	}
 	close(fd);
@@ -114,7 +114,7 @@ int	main()
 	fill_matrix(map);
 	for (int i = 0; map[i]; i++)
 		printf("%s\n", map[i]);
-	// printf("%d\n", check_walls(map));
-	// free(map);
+	printf("%d\n", check_walls(map));
+	free(map);
 	close(fd);
 }
