@@ -104,6 +104,35 @@ int	check_walls(char **map)
 	return (0);
 }
 
+int	check_exit_and_player(char **map)
+{
+	int	i;
+	int	j;
+	int	playerCount;
+	int	exitCount;
+
+	i = 0;
+	playerCount = 0;
+	exitCount = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'P')
+				playerCount++;
+			else if (map[i][j] == 'E')
+				exitCount++;
+			j++;
+		}
+		i++;
+	}
+	if (playerCount != 1 || exitCount != 1)
+		return (1);
+	else
+		return (0);
+}
+
 int	main()
 {
 	int	fd;
