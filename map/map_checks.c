@@ -98,7 +98,7 @@ void	fill(char **map, int x, int y, int *count_cmp)
 		(*count_cmp)++;
 	}
 	target = '+';
-	fill(map, x + 1, y, count_cmp);
+	fill(map, x - 1, y, count_cmp);
 	fill(map, x + 1, y, count_cmp);
 	fill(map, x, y + 1, count_cmp);
 	fill(map, x, y - 1, count_cmp);
