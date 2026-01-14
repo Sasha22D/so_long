@@ -30,7 +30,7 @@ int	check_walls(char **map)
 	return (0);
 }
 
-int	check_exit_and_player(char **map)
+int	check_exit_and_player(char **map, t_game **gameStruct)
 {
 	int	i;
 	int	j;
@@ -46,7 +46,11 @@ int	check_exit_and_player(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == 'P')
+			{
 				playerCount++;
+				(*gameStruct)->player_x = i;
+				(*gameStruct)->player_y = j;
+			}
 			else if (map[i][j] == 'E')
 				exitCount++;
 			j++;
@@ -77,7 +81,36 @@ int	check_collectibles(char **map)
 		}
 		i++;
 	}
-	if (collectibleCount == 0)
-		return (1);
-	return (0);
+	return (collectibleCount);
+}
+
+void	fill(char **map, int x, int y, int *count_cmp)
+{
+	char	target;
+
+	target = map[x][y];
+	if (target == '+' || target == '1')
+		return ;
+	if (target == 'C')
+	{
+		(*count_cmp)++;
+	}
+	target = '+';
+	fill(map, x + 1, y, count_cmp);
+	fill(map, x + 1, y, count_cmp);
+	fill(map, x, y + 1, count_cmp);
+	fill(map, x, y - 1, count_cmp);
+}
+
+int	check_path(char **map, int x, int y, int count)
+{
+	int		count_cmp;
+	char	**map_copy;
+
+	count_cmp = 0;
+	map_copy = map;
+	fill(map_copy, x, y, &count_cmp);
+	if (count_cmp == count)
+		return (0);
+	return (1);
 }
