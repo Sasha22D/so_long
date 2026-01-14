@@ -30,7 +30,7 @@ int	check_walls(char **map)
 	return (0);
 }
 
-int	check_exit_and_player(char **map, t_game **gameStruct)
+int	check_exit_and_player(char **map, t_game *gameStruct)
 {
 	int	i;
 	int	j;
@@ -48,8 +48,8 @@ int	check_exit_and_player(char **map, t_game **gameStruct)
 			if (map[i][j] == 'P')
 			{
 				playerCount++;
-				(*gameStruct)->player_x = i;
-				(*gameStruct)->player_y = j;
+				(*gameStruct).player_x = i;
+				(*gameStruct).player_y = j;
 			}
 			else if (map[i][j] == 'E')
 				exitCount++;
@@ -88,6 +88,8 @@ void	fill(char **map, int x, int y, int *count_cmp)
 {
 	char	target;
 
+	if (!map[x] || !map[x][y])
+		return ;
 	target = map[x][y];
 	if (target == '+' || target == '1')
 		return ;

@@ -13,7 +13,7 @@ char	**init_matrix(int fd);
 void	fill_matrix(char **map);
 // MAP CHECKS
 int	check_walls(char **map);
-int	check_exit_and_player(char **map, t_game **gameStruct);
+int	check_exit_and_player(char **map, t_game *gameStruct);
 int	check_collectibles(char **map);
 int	check_path(char **map, int x, int y, int count);
 // UTILS FUNCTIONS

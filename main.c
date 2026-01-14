@@ -10,7 +10,8 @@ int	main()
 	fd = open("map.ber", O_RDONLY);
 	map = init_matrix(fd);
 	fill_matrix(map);
-	if (check_walls(map) || check_exit_and_player(map, &gameStruct)
+	gameStruct = malloc(sizeof(t_game));
+	if (check_walls(map) || check_exit_and_player(map, gameStruct)
 		|| check_collectibles(map) < 1)
 	{
 		destroy_map(map);
@@ -23,5 +24,6 @@ int	main()
 		printf("%d\n", result);
 	}
 	destroy_map(map);
+	free(gameStruct);
 	close(fd);
 }
