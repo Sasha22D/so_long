@@ -3,9 +3,11 @@
 static int	count_line_and_length(int fd, int *length)
 {
 	int		line_count;
+	int		error;
 	char	*line;
 
 	line_count = 0;
+	error = 0;
 	line = NULL;
 	while ((line = get_next_line(fd)))
 	{
@@ -14,11 +16,13 @@ static int	count_line_and_length(int fd, int *length)
 		else
 		{
 			if (*length != lenstr(line) || *length < 4)
-				return (free(line), -1);
+				error = -1;
 		}
 		line_count++;
 		free(line);
 	}
+	if (error == -1)
+		return (-1);
 	return (line_count);
 }
 
