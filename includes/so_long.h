@@ -1,6 +1,7 @@
 
 #include "../gnlFolder/get_next_line.h"
 #include <fcntl.h>
+#include <stdio.h>
 
 typedef struct	s_game
 {
@@ -17,7 +18,9 @@ void	fill_matrix(char **map);
 int	check_walls(char **map);
 int	check_exit_and_player(char **map, t_game *gameStruct);
 int	check_collectibles(char **map);
-int	check_path(char **map, int x, int y, int count);
+int	check_path(char **map, int x, int y, int count, t_game *gameStruct);
+// MAP CHECKER
+int	map_checker(char **map, int fd, t_game *gameStruct);
 // UTILS FUNCTIONS
 int	lenstr(char *str);
 void	destroy_map(char **map);
