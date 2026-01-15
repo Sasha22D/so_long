@@ -84,11 +84,11 @@ int	check_collectibles(char **map)
 	return (collectibleCount);
 }
 
-void	fill(char **map, int x, int y, int *count_cmp)
+void	fill(char **map, int x, int y, int *count_cmp, t_game *gameStruct)
 {
 	char	target;
 
-	if (!map[x] || !map[x][y])
+	if (x > gameStruct->length || x < 0 || y > gameStruct->width || y < 0)
 		return ;
 	target = map[x][y];
 	if (target == '+' || target == '1')
@@ -98,20 +98,20 @@ void	fill(char **map, int x, int y, int *count_cmp)
 		(*count_cmp)++;
 	}
 	map[x][y] = '+';
-	fill(map, x - 1, y, count_cmp);
-	fill(map, x + 1, y, count_cmp);
-	fill(map, x, y + 1, count_cmp);
-	fill(map, x, y - 1, count_cmp);
+	fill(map, x - 1, y, count_cmp, gameStruct);
+	fill(map, x + 1, y, count_cmp, gameStruct);
+	fill(map, x, y + 1, count_cmp, gameStruct);
+	fill(map, x, y - 1, count_cmp, gameStruct);
 }
 
-int	check_path(char **map, int x, int y, int count)
+int	check_path(char **map, int x, int y, int count, t_game *gameStruct)
 {
 	int		count_cmp;
 	char	**map_copy;
 
 	count_cmp = 0;
 	map_copy = map;
-	fill(map_copy, x, y, &count_cmp);
+	fill(map_copy, x, y, &count_cmp, gameStruct);
 	if (count_cmp == count)
 		return (0);
 	return (1);
