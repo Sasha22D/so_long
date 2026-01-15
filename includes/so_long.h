@@ -24,3 +24,4 @@ int	map_checker(char **map, int fd, t_game *gameStruct);
 // UTILS FUNCTIONS
 int	lenstr(char *str);
 void	destroy_map(char **map);
+void	error_printer(char c);
