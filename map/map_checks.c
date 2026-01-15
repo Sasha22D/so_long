@@ -9,14 +9,14 @@ int	check_walls(char **map)
 	j = 0;
 	while (map[0][j])
 	{
-		if (map[0][j] != '1')
-			return (1);
+		if (map[0][j] && map[0][j] != '1')
+			return (-1);
 		j++;
 	}
 	while (map[i])
 	{
 		if (map[i][0] != '1' || map[i][j - 1] != '1')
-			return (1);
+			return (-1);
 		i++;
 	}
 	j = 0;
@@ -24,7 +24,7 @@ int	check_walls(char **map)
 	while (map[i][j])
 	{
 		if (map[i][j] != '1')
-			return (1);
+			return (-1);
 		j++;
 	}
 	return (0);
@@ -58,7 +58,7 @@ int	check_exit_and_player(char **map, t_game *gameStruct)
 		i++;
 	}
 	if (playerCount != 1 || exitCount != 1)
-		return (1);
+		return (-1);
 	return (0);
 }
 
@@ -88,7 +88,7 @@ void	fill(char **map, int x, int y, int *count_cmp, t_game *gameStruct)
 {
 	char	target;
 
-	if (x > gameStruct->length || x < 0 || y > gameStruct->width || y < 0)
+	if (x >= gameStruct->length || x < 0 || y >= gameStruct->width || y < 0)
 		return ;
 	target = map[x][y];
 	if (target == '+' || target == '1')
@@ -114,5 +114,5 @@ int	check_path(char **map, int x, int y, int count, t_game *gameStruct)
 	fill(map_copy, x, y, &count_cmp, gameStruct);
 	if (count_cmp == count)
 		return (0);
-	return (1);
+	return (-1);
 }

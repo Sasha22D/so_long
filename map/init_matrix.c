@@ -15,11 +15,12 @@ static int	count_line_and_length(int fd, int *length)
 			*length = lenstr(line);
 		else
 		{
-			if (*length != lenstr(line) || *length < 4)
+			if (*length != lenstr(line))
 				error = -1;
 		}
 		line_count++;
 		free(line);
+		line = NULL;
 	}
 	if (error == -1)
 		return (-1);
@@ -75,7 +76,9 @@ void	fill_matrix(char **map)
 				map[i][j] = line[j];
 			j++;
 		}
+		map[i][j - 1] = '\0';
 		free(line);
+		line = NULL;
 		i++;
 	}
 	close(fd);

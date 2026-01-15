@@ -32,9 +32,9 @@ void	error_printer(char c)
 	else if (c == 'w')
 		perror("Map is not surrounded by walls.\n");
 	else if (c == 'e')
-		perror("More than 1 exit and/or player detected.\n");
+		perror("Number of exit and/or player different than 1 detected.\n");
 	else if (c == 'c')
 		perror("Map doesn't have collectibles.\n");
 	else if (c == 'p')
-		perror("Not all collectibles can be reachde by player.\n");
+		perror("Not all collectibles can be reached by player.\n");
 }
