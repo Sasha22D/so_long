@@ -4,12 +4,14 @@
 
 typedef struct	s_game
 {
+	int	width;
+	int	length;
 	int	player_x;
 	int	player_y;
 }				t_game;
 
 // =========MAP==========
-char	**init_matrix(int fd);
+char	**init_matrix(int fd, t_game *gameStruct);
 void	fill_matrix(char **map);
 // MAP CHECKS
 int	check_walls(char **map);
