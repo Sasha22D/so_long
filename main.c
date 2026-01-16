@@ -1,22 +1,28 @@
 #include "so_long.h"
 
-int	main(int ac, char **av)
+void	is_map_valid(t_game *gameStruct, char *str)
 {
 	int	fd;
-	t_game	*gameStruct;
 
-	if (ac == 2)
+	fd = open(str, O_RDONLY);
+	(*gameStruct).map = map_checker(NULL, fd, gameStruct);
+	if ((*gameStruct).map == NULL)
 	{
-		fd = open(av[1], O_RDONLY);
-		// if (fd < 0)
-			// PRINT ERROR FD
-		gameStruct = malloc(sizeof(t_game));
-		if (!gameStruct)
-			exit(EXIT_FAILURE);
-		gameStruct->map = map_checker(NULL, fd, gameStruct);
-		if (gameStruct->map == NULL)
-			error_free(fd, gameStruct);
-		free(gameStruct);
+		error_free(fd, gameStruct);
+		exit(EXIT_FAILURE);
 	}
+}
+
+int	main(int ac, char **av)
+{
+	t_game	*gameStruct;
+	(void)ac;
+
+	gameStruct = malloc(sizeof(t_game));
+	//ARGS CHECKER
+	is_map_valid(gameStruct, av[1]);
+	
+	destroy_map(gameStruct->map);
+	free(gameStruct);
 }
 
