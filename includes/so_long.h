@@ -1,5 +1,4 @@
-
-#include "../gnlFolder/get_next_line.h"
+#include "../libft/libft.h"
 #include <fcntl.h>
 #include <stdio.h>
 

@@ -108,11 +108,28 @@ int	check_path(char **map, int x, int y, int count, t_game *gameStruct)
 {
 	int		count_cmp;
 	char	**map_copy;
+	int		i;
 
 	count_cmp = 0;
-	map_copy = map;
+	i = 0;
+	while (map[i])
+		i++;
+	map_copy = malloc(sizeof(char *) * (i + 1));
+	if (!map_copy)
+		return (-1);
+	i = 0;
+	while (map[i])
+	{
+		map_copy[i] = ft_strdup(map[i]);
+		i++;
+	}
+	map_copy[i] = NULL;
 	fill(map_copy, x, y, &count_cmp, gameStruct);
 	if (count_cmp == count)
+	{
+		destroy_map(map_copy);
 		return (0);
+	}
+	destroy_map(map_copy);
 	return (-1);
 }
