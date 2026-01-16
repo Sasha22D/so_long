@@ -21,8 +21,8 @@ int	main(int ac, char **av)
 	gameStruct = malloc(sizeof(t_game));
 	//ARGS CHECKER
 	is_map_valid(gameStruct, av[1]);
-	for (int i = 0; gameStruct->map[i]; i++)
-		printf("%s\n", gameStruct->map[i]);
+	init_mlx(gameStruct);
+	
 	destroy_map(gameStruct->map);
 	free(gameStruct);
 }
