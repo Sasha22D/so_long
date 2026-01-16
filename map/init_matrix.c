@@ -47,6 +47,7 @@ char	**init_matrix(int fd, t_game *gameStruct)
 		matrix[i] = malloc(sizeof(char) * (length + 1));
 		if (!matrix[i])
 			return (destroy_map(matrix), NULL);
+		matrix[i][length] = '\0';
 		i++;
 	}
 	matrix[i] = NULL;
@@ -76,7 +77,6 @@ void	fill_matrix(char **map)
 				map[i][j] = line[j];
 			j++;
 		}
-		map[i][j - 1] = '\0';
 		free(line);
 		line = NULL;
 		i++;
