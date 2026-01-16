@@ -9,6 +9,8 @@ typedef struct	s_game
 	int		player_x;
 	int		player_y;
 	char	**map;
+	void	*mlx;
+	void	*mlx_win;
 }				t_game;
 
 // =========MAP==========
@@ -26,3 +28,5 @@ int		lenstr(char *str);
 void	destroy_map(char **map);
 void	error_printer(char c);
 void	error_free(int fd, t_game *gameStruct);
+// MINILIBX
+void	init_mlx(t_game *gameStruct);
