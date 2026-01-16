@@ -38,3 +38,10 @@ void	error_printer(char c)
 	else if (c == 'p')
 		perror("Not all collectibles can be reached by player.\n");
 }
+
+void	error_free(char **map, int fd, t_game *gameStruct)
+{
+	destroy_map(map);
+	free(gameStruct);
+	close(fd);
+}
