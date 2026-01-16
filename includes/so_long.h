@@ -9,6 +9,7 @@ typedef struct	s_game
 	int	length;
 	int	player_x;
 	int	player_y;
+	char	**map;
 }				t_game;
 
 // =========MAP==========
@@ -20,9 +21,9 @@ int	check_exit_and_player(char **map, t_game *gameStruct);
 int	check_collectibles(char **map);
 int	check_path(char **map, int x, int y, int count, t_game *gameStruct);
 // MAP CHECKER
-int	map_checker(char **map, int fd, t_game *gameStruct);
+char	**map_checker(char **map, int fd, t_game *gameStruct);
 // UTILS FUNCTIONS
 int	lenstr(char *str);
 void	destroy_map(char **map);
 void	error_printer(char c);
-void	error_free(char **map, int fd, t_game *gameStruct);
+void	error_free(int fd, t_game *gameStruct);

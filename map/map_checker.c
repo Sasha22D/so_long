@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-char	*map_checker(char **map, int fd, t_game *gameStruct)
+char	**map_checker(char **map, int fd, t_game *gameStruct)
 {
 	map = init_matrix(fd, gameStruct);
 	if (map == NULL)
