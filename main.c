@@ -24,6 +24,8 @@ int	main(int ac, char **av)
 	init_mlx(gameStruct);
 	init_sprites(gameStruct);
 	//RENDER MAP
+	render_floor(gameStruct);
+	render_walls(gameStruct);
 	//HOOKS
 	mlx_loop(gameStruct->mlx);
 	destroy_map(gameStruct->map);

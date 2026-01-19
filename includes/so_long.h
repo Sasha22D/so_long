@@ -52,3 +52,5 @@ void	error_free(int fd, t_game *gameStruct);
 // MINILIBX
 void	init_mlx(t_game *gameStruct);
 void	init_sprites(t_game *gameStruct);
+void	render_floor(t_game *gameStruct);
+void	render_walls(t_game *gameStruct);

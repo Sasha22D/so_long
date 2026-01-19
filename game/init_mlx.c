@@ -64,3 +64,22 @@ void	render_floor(t_game *gameStruct)
 		i++;
 	}
 }
+
+void	render_walls(t_game *gameStruct)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (gameStruct->map[i])
+	{
+		j = 0;
+		while (gameStruct->map[i][j])
+		{
+			if (gameStruct->map[i][j] == '1')
+				mlx_put_image_to_window(gameStruct->mlx, gameStruct->mlx_win, gameStruct->walls.sprite, j * 32, i * 32);
+			j++;
+		}
+		i++;
+	}
+}
