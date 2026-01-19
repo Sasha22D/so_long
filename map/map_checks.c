@@ -7,6 +7,8 @@ int	check_walls(char **map)
 
 	i = 0;
 	j = 0;
+	if (map[0] == NULL)
+		return (-1);
 	while (map[0][j])
 	{
 		if (map[0][j] && map[0][j] != '1')
