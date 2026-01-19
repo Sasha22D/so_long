@@ -13,6 +13,21 @@ void	is_map_valid(t_game *gameStruct, char *str)
 	}
 }
 
+int	close_window(int keycode, t_game *gameStruct)
+{
+	if (keycode == ESC)
+		mlx_destroy_window(gameStruct->mlx, gameStruct->mlx_win);
+	if (keycode == W || keycode == UP)
+		move_up(gameStruct);
+	if (keycode == A || keycode == LEFT)
+		ft_printf("LEFT\n");
+	if (keycode == S || keycode == DOWN)
+		ft_printf("DOWN\n");
+	if (keycode == D || keycode == RIGHT)
+		ft_printf("RIGHT\n");
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_game	*gameStruct;
@@ -24,9 +39,9 @@ int	main(int ac, char **av)
 	init_mlx(gameStruct);
 	init_sprites(gameStruct);
 	//RENDER MAP
-	render_floor(gameStruct);
-	render_walls(gameStruct);
+	render_map(gameStruct);
 	//HOOKS
+	mlx_hook(gameStruct->mlx_win, 2, 1L<<0, close_window, &gameStruct);
 	mlx_loop(gameStruct->mlx);
 	destroy_map(gameStruct->map);
 	free(gameStruct);
