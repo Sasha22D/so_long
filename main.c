@@ -22,7 +22,10 @@ int	main(int ac, char **av)
 	//ARGS CHECKER
 	is_map_valid(gameStruct, av[1]);
 	init_mlx(gameStruct);
-	
+	init_sprites(gameStruct);
+	//RENDER MAP
+	//HOOKS
+	mlx_loop(gameStruct->mlx);
 	destroy_map(gameStruct->map);
 	free(gameStruct);
 }

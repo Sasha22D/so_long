@@ -1,6 +1,22 @@
+#pragma once
+
 #include "../libft/libft.h"
+#include "../minilibx-linux/mlx.h"
 #include <fcntl.h>
 #include <stdio.h>
+
+#define PLAYER "./assets/player.xpm"
+#define WALL "./assets/wall.xpm"
+#define FLOOR "./assets/sand.xpm"
+#define COLLECTIBLE "./assets/coin.xpm"
+#define EXIT "./assets/door.xpm"
+
+typedef	struct	s_sprite
+{
+	void	*sprite;
+	int		width;
+	int		height;
+}				t_sprite;
 
 typedef struct	s_game
 {
@@ -11,6 +27,11 @@ typedef struct	s_game
 	char	**map;
 	void	*mlx;
 	void	*mlx_win;
+	t_sprite	walls;
+	t_sprite	collectibles;
+	t_sprite	player;
+	t_sprite	exit;
+	t_sprite	spaces;
 }				t_game;
 
 // =========MAP==========
@@ -30,3 +51,4 @@ void	error_printer(char c);
 void	error_free(int fd, t_game *gameStruct);
 // MINILIBX
 void	init_mlx(t_game *gameStruct);
+void	init_sprites(t_game *gameStruct);
