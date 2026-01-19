@@ -10,9 +10,10 @@ char	**map_checker(char **map, int fd, t_game *gameStruct)
 		return (destroy_map(map), error_printer('w'), NULL);
 	if (check_exit_and_player(map, gameStruct) == -1)
 		return (destroy_map(map), error_printer('e'), NULL);
-	if (check_collectibles(map) == 0)
+	check_collectibles(map, gameStruct);
+	if (gameStruct->count_collectibles == 0)
 		return (destroy_map(map), error_printer('c'), NULL);
-	if (check_path(map, gameStruct->player_x, gameStruct->player_y, check_collectibles(map), gameStruct) == -1)
+	if (check_path(map, gameStruct->player_x, gameStruct->player_y, gameStruct->count_collectibles, gameStruct) == -1)
 		return (destroy_map(map), error_printer('p'), NULL);
 	return (map);
 }

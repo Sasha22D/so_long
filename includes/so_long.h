@@ -11,6 +11,18 @@
 #define COLLECTIBLE "./assets/coin.xpm"
 #define EXIT "./assets/door.xpm"
 
+#define ESC 65307
+
+#define W 119
+#define A 97
+#define S 115
+#define D 100
+
+#define UP 65362
+#define LEFT 65361
+#define DOWN 65364
+#define RIGHT 65363
+
 typedef	struct	s_sprite
 {
 	void	*sprite;
@@ -24,6 +36,7 @@ typedef struct	s_game
 	int		length;
 	int		player_x;
 	int		player_y;
+	int		count_collectibles;
 	char	**map;
 	void	*mlx;
 	void	*mlx_win;
@@ -40,7 +53,7 @@ void	fill_matrix(char **map);
 // MAP CHECKS
 int		check_walls(char **map);
 int		check_exit_and_player(char **map, t_game *gameStruct);
-int		check_collectibles(char **map);
+void		check_collectibles(char **map, t_game *gameStruct);
 int		check_path(char **map, int x, int y, int count, t_game *gameStruct);
 // MAP CHECKER
 char	**map_checker(char **map, int fd, t_game *gameStruct);
@@ -52,5 +65,8 @@ void	error_free(int fd, t_game *gameStruct);
 // MINILIBX
 void	init_mlx(t_game *gameStruct);
 void	init_sprites(t_game *gameStruct);
-void	render_floor(t_game *gameStruct);
-void	render_walls(t_game *gameStruct);
+void	render_player_collectibles_exit(t_game *gameStruct);
+void	render_map(t_game *gameStruct);
+
+// MOVE PLAYER
+void	move_up(t_game *gameStruct);

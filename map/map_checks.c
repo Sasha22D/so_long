@@ -62,26 +62,24 @@ int	check_exit_and_player(char **map, t_game *gameStruct)
 	return (0);
 }
 
-int	check_collectibles(char **map)
+void	check_collectibles(char **map, t_game *gameStruct)
 {
 	int	i;
 	int	j;
-	int	collectibleCount;
+	gameStruct->count_collectibles = 0;
 
 	i = 0;
-	collectibleCount = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
 			if (map[i][j] == 'C')
-				collectibleCount++;
+				gameStruct->count_collectibles++;
 			j++;
 		}
 		i++;
 	}
-	return (collectibleCount);
 }
 
 void	fill(char **map, int x, int y, int *count_cmp, t_game *gameStruct)
