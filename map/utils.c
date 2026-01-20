@@ -36,7 +36,7 @@ void	error_printer(char c)
 	else if (c == 'c')
 		perror("Map doesn't have collectibles.\n");
 	else if (c == 'p')
-		perror("Not all collectibles can be reached by player.\n");
+		perror("At least one collectible or the exit can't be reached by player.\n");
 }
 
 void	error_free(int fd, t_game *gameStruct)

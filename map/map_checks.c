@@ -69,6 +69,7 @@ void	check_collectibles(char **map, t_game *gameStruct)
 	int	i;
 	int	j;
 	gameStruct->count_collectibles = 0;
+	gameStruct->count_move = 0;
 
 	i = 0;
 	while (map[i])
@@ -93,7 +94,7 @@ void	fill(char **map, int x, int y, int *count_cmp, t_game *gameStruct)
 	target = map[x][y];
 	if (target == '+' || target == '1')
 		return ;
-	if (target == 'C')
+	if (target == 'C' || target == 'E')
 	{
 		(*count_cmp)++;
 	}
@@ -125,7 +126,7 @@ int	check_path(char **map, int x, int y, int count, t_game *gameStruct)
 	}
 	map_copy[i] = NULL;
 	fill(map_copy, x, y, &count_cmp, gameStruct);
-	if (count_cmp == count)
+	if (count_cmp == (count + 1))
 	{
 		destroy_map(map_copy);
 		return (0);

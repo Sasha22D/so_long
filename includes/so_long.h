@@ -37,6 +37,7 @@ typedef struct	s_game
 	int		player_x;
 	int		player_y;
 	int		count_collectibles;
+	int		count_move;
 	char	**map;
 	void	*mlx;
 	void	*mlx_win;
@@ -69,4 +70,6 @@ void	render_player_collectibles_exit(t_game *gameStruct);
 void	render_map(t_game *gameStruct);
 
 // MOVE PLAYER
-void	move_up(t_game *gameStruct);
+void	move_player(t_game *gameStruct, int new_x, int new_y);
+
+// cflag -g3 main.c game/*.c map/*.c -I./includes -L./libft -lft -L./minilibx-linux -lmlx -lXext -lX11 -lbsd -o test
