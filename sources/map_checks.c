@@ -108,6 +108,8 @@ void	fill(char **map, int x, int y, int *count_cmp, t_game *game)
 	if (target == 'C' || target == 'E')
 	{
 		(*count_cmp)++;
+		if (target == 'E')
+			return ;
 	}
 	map[x][y] = '+';
 	fill(map, x - 1, y, count_cmp, game);

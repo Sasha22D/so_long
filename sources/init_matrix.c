@@ -18,8 +18,11 @@ static int	count_line_and_length(int fd, int *length)
 
 	line_count = 0;
 	line = NULL;
-	while ((line = get_next_line(fd)))
+	while (1)
 	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
 		if (line_count == 0)
 			*length = lenstr(line);
 		else
@@ -29,7 +32,6 @@ static int	count_line_and_length(int fd, int *length)
 		}
 		line_count++;
 		free(line);
-		// line = NULL;
 	}
 	return (line_count);
 }

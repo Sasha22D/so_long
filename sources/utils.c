@@ -26,8 +26,11 @@ void	destroy_map(char **map)
 	int	i;
 
 	i = 0;
-	// if (!map || !map[i]) QUAND MAP VIDE MAP[0]==NULL
-	// 	return ;
+	if (!map || !map[i])
+	{
+		free(map);
+		return ;
+	}
 	while (map[i])
 	{
 		free(map[i]);
