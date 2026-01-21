@@ -24,15 +24,10 @@ void	is_map_valid(t_game *game, char *str)
 	}
 }
 
-int	close_window(int keycode, t_game *game)
+int	input_handler(int keycode, t_game *game)
 {
 	if (keycode == ESC)
-	{
-		mlx_destroy_window(game->mlx, game->mlx_win);
-		free(game);
-		destroy_map(game->map);
-		exit(EXIT_SUCCESS);
-	}
+		close_game(game);
 	if (keycode == W || keycode == UP)
 		move_player(game, game->player_x - 1, game->player_y);
 	if (keycode == A || keycode == LEFT)
@@ -55,8 +50,9 @@ int	main(int ac, char **av)
 	init_mlx(game);
 	init_sprites(game);
 	render_map(game);
-	mlx_hook(game->mlx_win, 2, 1L << 0, close_window, game);
+	mlx_hook(game->mlx_win, 2, 1L << 0, input_handler, game);
 	mlx_loop(game->mlx);
+	ft_destroy_images(game);
 	destroy_map(game->map);
 	free(game);
 }

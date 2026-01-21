@@ -17,8 +17,8 @@ void	init_mlx(t_game *game)
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
 	{
-		free(game);
 		destroy_map(game->map);
+		free(game);
 		ft_printf("Couldn't initialize mlx.\n");
 		exit(EXIT_FAILURE);
 	}
@@ -26,8 +26,8 @@ void	init_mlx(t_game *game)
 		game->length * 32, "so_long");
 	if (game->mlx_win == NULL)
 	{
-		free(game);
 		destroy_map(game->map);
+		free(game);
 		ft_printf("Couldn't initialize window.\n");
 		exit(EXIT_FAILURE);
 	}
@@ -39,10 +39,10 @@ t_sprite	new_sprite(void *mlx, t_game *game, char *path)
 
 	sprite.sprite = mlx_xpm_file_to_image(mlx, path, \
 		&sprite.width, &sprite.height);
-	if (sprite.width == 5)
+	if (sprite.sprite == NULL)
 	{
-		free(game);
 		destroy_map(game->map);
+		free(game);
 		ft_printf("XPM failed to load.\n");
 	}
 	return (sprite);
@@ -58,4 +58,24 @@ void	init_sprites(t_game *game)
 	game->spaces = new_sprite(mlx, game, FLOOR);
 	game->collectibles = new_sprite(mlx, game, COLLECTIBLE);
 	game->exit = new_sprite(mlx, game, EXIT);
+}
+
+void	ft_destroy_images(t_game *game)
+{
+	mlx_destroy_image(game->mlx, game->collectibles.sprite);
+	mlx_destroy_image(game->mlx, game->exit.sprite);
+	mlx_destroy_image(game->mlx, game->spaces.sprite);
+	mlx_destroy_image(game->mlx, game->player.sprite);
+	mlx_destroy_image(game->mlx, game->walls.sprite);
+}
+
+void	close_game(t_game *game)
+{
+	ft_destroy_images(game);
+	mlx_destroy_window(game->mlx, game->mlx_win);
+	mlx_destroy_display(game->mlx);
+	destroy_map(game->map);
+	free(game->mlx);
+	free(game);
+	exit(EXIT_SUCCESS);
 }

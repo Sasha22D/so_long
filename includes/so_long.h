@@ -75,6 +75,8 @@ int		lenstr(char *str);
 void	destroy_map(char **map);
 void	error_printer(char c);
 void	error_free(int fd, t_game *game);
+void	ft_destroy_images(t_game *game);
+void	close_game(t_game *game);
 // MINILIBX
 void	init_mlx(t_game *game);
 void	init_sprites(t_game *game);
@@ -83,5 +85,7 @@ void	render_map(t_game *game);
 
 // MOVE PLAYER
 void	move_player(t_game *game, int new_x, int new_y);
+
+// cflag -g3 main.c game/*.c map/*.c -I./includes -L./libft -lft -L./minilibx-linux -lmlx -lXext -lX11 -lbsd -o so_long
 
 #endif
