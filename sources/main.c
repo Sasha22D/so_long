@@ -43,9 +43,9 @@ int	main(int ac, char **av)
 {
 	t_game	*game;
 
-	(void)ac;
+	if (ac != 2)
+		exit(EXIT_FAILURE);
 	game = malloc(sizeof(t_game));
-	//ARGS CHECKER
 	is_map_valid(game, av[1]);
 	init_mlx(game);
 	init_sprites(game);

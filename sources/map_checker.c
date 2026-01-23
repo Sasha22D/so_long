@@ -17,9 +17,9 @@ char	**map_checker(char **map, int fd, t_game *game)
 	if (map == NULL)
 		return (destroy_map(map), error_printer('m'), NULL);
 	fill_matrix(map);
-	if (check_walls(map) == -1)
+	if (check_wrong_characters(map) == -1 || check_walls(map) == -1)
 		return (destroy_map(map), error_printer('w'), NULL);
-	if (check_exit_and_player(map, game) == -1)
+	if (check_exit_and_player(map) == -1)
 		return (destroy_map(map), error_printer('e'), NULL);
 	check_collectibles(map, game);
 	if (game->count_collectibles == 0)

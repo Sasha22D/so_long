@@ -44,7 +44,7 @@ void	error_printer(char c)
 	if (c == 'm')
 		perror("Map size is wrong.\n");
 	else if (c == 'w')
-		perror("Map is not surrounded by walls.\n");
+		perror("A character is wrong or the map is not surrounded by walls.\n");
 	else if (c == 'e')
 		perror("Number of exit and/or player different than 1 detected.\n");
 	else if (c == 'c')
@@ -58,4 +58,26 @@ void	error_free(int fd, t_game *game)
 {
 	free(game);
 	close(fd);
+}
+
+int	check_wrong_characters(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] != '1' && map[i][j] != '0' &&
+				map[i][j] != 'C' && map[i][j] != 'E' &&
+				map[i][j] != 'P')
+				return (-1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }

@@ -18,7 +18,7 @@ int	check_walls(char **map)
 
 	i = 0;
 	j = 0;
-	if (map[0] == NULL)
+	if (map[0] == NULL || check_columns(map) == -1)
 		return (-1);
 	while (map[0][j])
 	{
@@ -27,11 +27,7 @@ int	check_walls(char **map)
 		j++;
 	}
 	while (map[i])
-	{
-		if (map[i][0] != '1' || map[i][j - 1] != '1')
-			return (-1);
 		i++;
-	}
 	j = 0;
 	i -= 1;
 	while (map[i][j])
@@ -43,7 +39,7 @@ int	check_walls(char **map)
 	return (0);
 }
 
-int	check_exit_and_player(char **map, t_game *game)
+int	check_exit_and_player(char **map)
 {
 	int	i;
 	int	j;
@@ -59,11 +55,7 @@ int	check_exit_and_player(char **map, t_game *game)
 		while (map[i][j])
 		{
 			if (map[i][j] == 'P')
-			{
 				player_count++;
-				(*game).player_x = i;
-				(*game).player_y = j;
-			}
 			else if (map[i][j] == 'E')
 				exit_count++;
 			j++;
@@ -90,13 +82,18 @@ void	check_collectibles(char **map, t_game *game)
 		{
 			if (map[i][j] == 'C')
 				game->count_collectibles++;
+			if (map[i][j] == 'P')
+			{
+				game->player_x = i;
+				game->player_y = j;
+			}
 			j++;
 		}
 		i++;
 	}
 }
 
-void	fill(char **map, int x, int y, int *count_cmp, t_game *game)
+void	fill(char **map, int x, int y, t_game *game)
 {
 	char	target;
 
@@ -107,15 +104,15 @@ void	fill(char **map, int x, int y, int *count_cmp, t_game *game)
 		return ;
 	if (target == 'C' || target == 'E')
 	{
-		(*count_cmp)++;
+		game->count_collectibles--;
 		if (target == 'E')
 			return ;
 	}
 	map[x][y] = '+';
-	fill(map, x - 1, y, count_cmp, game);
-	fill(map, x + 1, y, count_cmp, game);
-	fill(map, x, y + 1, count_cmp, game);
-	fill(map, x, y - 1, count_cmp, game);
+	fill(map, x - 1, y, game);
+	fill(map, x + 1, y, game);
+	fill(map, x, y + 1, game);
+	fill(map, x, y - 1, game);
 }
 
 int	check_path(char **map, int x, int y, t_game *game)
@@ -124,7 +121,7 @@ int	check_path(char **map, int x, int y, t_game *game)
 	char	**map_copy;
 	int		i;
 
-	count_cmp = 0;
+	count_cmp = game->count_collectibles;
 	i = 0;
 	while (map[i])
 		i++;
@@ -138,9 +135,9 @@ int	check_path(char **map, int x, int y, t_game *game)
 		i++;
 	}
 	map_copy[i] = NULL;
-	fill(map_copy, x, y, &count_cmp, game);
+	fill(map_copy, x, y, game);
 	destroy_map(map_copy);
-	if (count_cmp == (game->count_collectibles + 1))
-		return (0);
+	if (0 == (game->count_collectibles + 1))
+		return (game->count_collectibles = count_cmp, 0);
 	return (-1);
 }
