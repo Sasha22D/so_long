@@ -42,8 +42,8 @@ int	input_handler(int keycode, t_game *game)
 int	handle_close_cross(void *param)
 {
 	t_game	*game;
-	game = (t_game *)param;
 
+	game = (t_game *)param;
 	close_game(game);
 	return (0);
 }
