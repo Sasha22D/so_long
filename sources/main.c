@@ -39,6 +39,15 @@ int	input_handler(int keycode, t_game *game)
 	return (0);
 }
 
+int	handle_close_cross(void *param)
+{
+	t_game	*game;
+	game = (t_game *)param;
+
+	close_game(game);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_game	*game;
@@ -51,6 +60,7 @@ int	main(int ac, char **av)
 	init_sprites(game);
 	render_map(game);
 	mlx_hook(game->mlx_win, 2, 1L << 0, input_handler, game);
+	mlx_hook(game->mlx_win, 17, 1L << 17, &handle_close_cross, game);
 	mlx_loop(game->mlx);
 	ft_destroy_images(game);
 	destroy_map(game->map);

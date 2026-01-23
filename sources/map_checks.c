@@ -100,14 +100,10 @@ void	fill(char **map, int x, int y, t_game *game)
 	if (x >= game->length || x < 0 || y >= game->width || y < 0)
 		return ;
 	target = map[x][y];
-	if (target == '+' || target == '1')
+	if (target == '+' || target == '1' || target == 'E')
 		return ;
-	if (target == 'C' || target == 'E')
-	{
+	if (target == 'C')
 		game->count_collectibles--;
-		if (target == 'E')
-			return ;
-	}
 	map[x][y] = '+';
 	fill(map, x - 1, y, game);
 	fill(map, x + 1, y, game);
@@ -137,7 +133,7 @@ int	check_path(char **map, int x, int y, t_game *game)
 	map_copy[i] = NULL;
 	fill(map_copy, x, y, game);
 	destroy_map(map_copy);
-	if (0 == (game->count_collectibles + 1))
+	if (0 == (game->count_collectibles))
 		return (game->count_collectibles = count_cmp, 0);
 	return (-1);
 }
