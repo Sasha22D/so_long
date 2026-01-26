@@ -16,12 +16,18 @@ void	is_map_valid(t_game *game, char *str)
 	int	fd;
 
 	fd = open(str, O_RDONLY);
+	if (fd < 0)
+	{
+		error_free(fd, game);
+		exit(EXIT_FAILURE);
+	}
 	(*game).map = map_checker(NULL, fd, game);
 	if ((*game).map == NULL)
 	{
 		error_free(fd, game);
 		exit(EXIT_FAILURE);
 	}
+	close(fd);
 }
 
 int	input_handler(int keycode, t_game *game)
@@ -55,6 +61,8 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		exit(EXIT_FAILURE);
 	game = malloc(sizeof(t_game));
+	if (!game)
+		return (-1);
 	is_map_valid(game, av[1]);
 	init_mlx(game);
 	init_sprites(game);
