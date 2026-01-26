@@ -44,14 +44,15 @@ void	error_printer(char c)
 	if (c == 'm')
 		ft_printf("Map size is wrong.\n");
 	else if (c == 'w')
-		ft_printf("A character is wrong or the map is not surrounded by walls.\n");
+		ft_printf("A character is wrong or the map is "
+			"not surrounded by walls.\n");
 	else if (c == 'e')
 		ft_printf("Number of exit and/or player different than 1 detected.\n");
 	else if (c == 'c')
 		ft_printf("Map doesn't have collectibles.\n");
 	else if (c == 'p')
-		ft_printf("At least one collectible or the \
-			exit can't be reached by player.\n");
+		ft_printf("At least one collectible or the "
+			"exit can't be reached by player.\n");
 }
 
 void	error_free(int fd, t_game *game)
