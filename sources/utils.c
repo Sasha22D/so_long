@@ -42,15 +42,15 @@ void	destroy_map(char **map)
 void	error_printer(char c)
 {
 	if (c == 'm')
-		perror("Map size is wrong.\n");
+		ft_printf("Map size is wrong.\n");
 	else if (c == 'w')
-		perror("A character is wrong or the map is not surrounded by walls.\n");
+		ft_printf("A character is wrong or the map is not surrounded by walls.\n");
 	else if (c == 'e')
-		perror("Number of exit and/or player different than 1 detected.\n");
+		ft_printf("Number of exit and/or player different than 1 detected.\n");
 	else if (c == 'c')
-		perror("Map doesn't have collectibles.\n");
+		ft_printf("Map doesn't have collectibles.\n");
 	else if (c == 'p')
-		perror("At least one collectible or the \
+		ft_printf("At least one collectible or the \
 			exit can't be reached by player.\n");
 }
 
