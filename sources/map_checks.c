@@ -106,7 +106,10 @@ void	fill(char **map, int x, int y, t_game *game)
 	{
 		game->count_collectibles--;
 		if (target == 'E')
+		{
+			map[x][y] = '1';
 			return ;
+		}
 	}
 	map[x][y] = '+';
 	fill(map, x - 1, y, game);
