@@ -44,6 +44,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) -C $(MINILIBX_DIR) clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
