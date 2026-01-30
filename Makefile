@@ -18,7 +18,8 @@ SRC_FILES = sources/main.c \
             sources/map_checker.c \
             sources/move_player.c \
             sources/render_map.c \
-            sources/utils.c
+            sources/utils.c \
+			sources/arg_checker.c
 
 OBJ_FILES = $(SRC_FILES:%.c=%.o)
 
@@ -28,23 +29,28 @@ LDFLAGS = -L$(LIBFT_DIR) -lft \
 all: $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	@echo "compiling LIBFT"
+	@$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(LIBFT) $(OBJ_FILES)
-	$(MAKE) -C $(MINILIBX_DIR)
-	$(CC) $(CFLAGS) -I$(INCLUDE_DIR) $^ $(LDFLAGS) -o $(NAME)
+	@echo "compiling minilibx and so_long"
+	@$(MAKE) -C $(MINILIBX_DIR)
+	@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) $^ $(LDFLAGS) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
+	@echo "compiling .c in .o"
+	@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
 clean:
-	rm -f $(OBJ_FILES)
-	$(MAKE) -C $(LIBFT_DIR) clean
+	@echo "cleaned obj files"
+	@rm -f $(OBJ_FILES)
+	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C $(MINILIBX_DIR) clean
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	@echo "fcleaned everything"
+	@rm -f $(NAME)
+	@$(MAKE) -C $(MINILIBX_DIR) clean
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

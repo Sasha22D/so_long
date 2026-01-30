@@ -11,12 +11,12 @@
 /* ************************************************************************** */
 #include "so_long.h"
 
-char	**map_checker(char **map, int fd, t_game *game)
+char	**map_checker(char **map, int fd, t_game *game, char *path)
 {
 	map = init_matrix(fd, game);
 	if (map == NULL)
 		return (destroy_map(map), error_printer('m'), NULL);
-	fill_matrix(map);
+	fill_matrix(map, path);
 	if (check_wrong_characters(map) == -1 || check_walls(map) == -1)
 		return (destroy_map(map), error_printer('w'), NULL);
 	if (check_exit_and_player(map) == -1)

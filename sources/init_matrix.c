@@ -69,14 +69,14 @@ char	**init_matrix(int fd, t_game *game)
 	return (matrix);
 }
 
-void	fill_matrix(char **map)
+void	fill_matrix(char **map, char *path)
 {
 	int		fd;
 	int		i;
 	int		j;
 	char	*line;
 
-	fd = open("map.ber", O_RDONLY);
+	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return ;
 	i = 0;

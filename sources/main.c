@@ -21,7 +21,7 @@ void	is_map_valid(t_game *game, char *str)
 		error_free(fd, game);
 		exit(EXIT_FAILURE);
 	}
-	(*game).map = map_checker(NULL, fd, game);
+	(*game).map = map_checker(NULL, fd, game, str);
 	if ((*game).map == NULL)
 	{
 		error_free(fd, game);
@@ -60,6 +60,8 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		exit(EXIT_FAILURE);
+	if (arg_checker(av[1]) == -1)
+		return (-1);
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (-1);
