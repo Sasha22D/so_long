@@ -69,7 +69,7 @@ int		check_exit_and_player(char **map);
 void	check_collectibles(char **map, t_game *game);
 int		check_path(char **map, int x, int y, t_game *game);
 int		check_wrong_characters(char **map);
-int	check_columns(char **map);
+int		check_columns(char **map);
 // MAP CHECKER
 char	**map_checker(char **map, int fd, t_game *game, char *path);
 int		arg_checker(char *str);
@@ -87,7 +87,5 @@ void	ft_destroy_images(t_game *game);
 void	close_game(t_game *game);
 // MOVE PLAYER
 void	move_player(t_game *game, int new_x, int new_y);
-
-// cflag -g3 main.c game/*.c map/*.c -I./includes -L./libft -lft -L./minilibx-linux -lmlx -lXext -lX11 -lbsd -o so_long
 
 #endif
