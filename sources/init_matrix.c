@@ -83,6 +83,8 @@ void	fill_matrix(char **map, char *path)
 	while (map[i])
 	{
 		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
 		j = 0;
 		while (line[j])
 		{
@@ -91,7 +93,6 @@ void	fill_matrix(char **map, char *path)
 			j++;
 		}
 		free(line);
-		line = NULL;
 		i++;
 	}
 	close(fd);

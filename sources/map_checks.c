@@ -135,6 +135,8 @@ int	check_path(char **map, int x, int y, t_game *game)
 	while (map[i])
 	{
 		map_copy[i] = ft_strdup(map[i]);
+		if (map_copy[i] == NULL)
+			return (destroy_map(map_copy), -1);
 		i++;
 	}
 	map_copy[i] = NULL;
