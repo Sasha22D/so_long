@@ -1,3 +1,5 @@
+MAKEFLAGS += -s
+
 NAME = so_long
 
 LIBFT_DIR = ./libft
